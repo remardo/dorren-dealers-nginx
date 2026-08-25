@@ -31,3 +31,13 @@ jobs:
           file: ./Dockerfile.nginx
           push: true
           tags: ghcr.io/remardo/dorren-dealers-nginx/nginx:alpine
+
+      - name: Make package public (diagnostic)
+        continue-on-error: true
+        run: |
+          echo "--- try /user/packages ---"
+          gh api -X PATCH "/user/packages/container/dorren-dealers-nginx%2Fnginx/visibility" -f visibility=public || true
+          echo "--- try /users/remardo/packages ---"
+          gh api -X PATCH "/users/remardo/packages/container/dorren-dealers-nginx%2Fnginx/visibility" -f visibility=public || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
