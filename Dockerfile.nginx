@@ -1,0 +1,2 @@
+FROM nginx:alpine
+# Lean static-file server base. Site files are injected at runtime via Coolify volume mount.
